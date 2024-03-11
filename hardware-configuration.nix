@@ -12,6 +12,9 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+ 
+  boot.supportedFilesystems = [ "zfs" ];  
+  boot.zfs.extraPools = [ "storage" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/ee07a0de-bbd2-49c7-af32-3df67dce211a";
@@ -35,6 +38,8 @@
   # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp8s0.useDHCP = lib.mkDefault true;
+
+  networking.hostId = "c0afdc7c";
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
