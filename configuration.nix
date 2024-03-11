@@ -118,7 +118,7 @@
   networking.nat = {
     enable = true;
     internalInterfaces = ["ve-+"];
-    externalInterfaces = "enp4s0";
+    externalInterface = "enp4s0";
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
