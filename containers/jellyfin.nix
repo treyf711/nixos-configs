@@ -5,6 +5,12 @@
     privateNetwork = true;
     hostAddress = "192.168.0.4";
     localAddress = "10.0.0.5";
+    bindMounts = {
+      "/media" = { 
+        hostPath = "/storage/media";
+        isReadOnly = false;
+      };
+    };
 
     config = { config, pkgs, lib, ...}: {
 
