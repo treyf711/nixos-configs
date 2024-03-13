@@ -41,6 +41,10 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
+  # Tailscale Auth
+  age.secrets.tailscale = {
+    file = /etc/nixos/secrets/ts-auth.age;
+  };
   services.tailscale.enable = true;
   
   services.zfs.autoScrub.enable = true;

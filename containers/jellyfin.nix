@@ -2,13 +2,17 @@
 {
   containers.jellyfin = {
     autoStart = true;
-    privateNetwork = true;
     hostAddress = "192.168.0.4";
     localAddress = "10.0.0.5";
+    enableTun = true;
     allowedDevices = [
       {
         modifier = "rw";
 	node = "/dev/dri/renderD128";
+      }
+      {
+        modifier = "rw";
+	node = "/dev/net/tun";
       }
     ];
     bindMounts = {
@@ -19,6 +23,11 @@
       "/dev/dri/renderD128" = {
         hostPath = "/dev/dri/renderD128";
         isReadOnly = false;
+      };
+      # secrets for ts-auth
+      "/etc/tailscale/authkey" = {
+        isReadOnly = true;
+	hostPath = "${config.age.secrets.tailscale.path}";
       };
     };
 
@@ -37,6 +46,9 @@
       networking.firewall.enable = true;
       networking.useHostResolvConf = lib.mkForce false;
       services.resolved.enable = true;
+      services.tailscale.interfaceName = "userspace-networking";
+      services.tailscale.enable = true;
+      services.tailscale.authKeyFile = "/etc/tailscale/authkey";
     };
   };
 }
