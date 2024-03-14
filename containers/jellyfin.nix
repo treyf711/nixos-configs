@@ -4,15 +4,10 @@
     autoStart = true;
     hostAddress = "192.168.0.4";
     localAddress = "10.0.0.5";
-    enableTun = true;
     allowedDevices = [
       {
         modifier = "rw";
 	node = "/dev/dri/renderD128";
-      }
-      {
-        modifier = "rw";
-	node = "/dev/net/tun";
       }
     ];
     bindMounts = {
